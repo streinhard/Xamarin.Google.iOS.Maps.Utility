@@ -1,0 +1,14 @@
+**/bin
+**/obj
+
+*.db
+.vs
+.idea
+.vscode
+.DS_Store
+*.user
+*.userprefs
+
+packages
+
+Resource.designer.cs
