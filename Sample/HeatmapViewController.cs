@@ -5,48 +5,28 @@ using Google.Maps.Utility;
 using CoreGraphics;
 using System.Collections.Generic;
 using CoreLocation;
+using System.Linq;
 
 namespace Sample
 {
-    public class HeatmapViewController : UIViewController
+    public class HeatmapViewController : MapViewController
     {
-        private readonly Random _random;
-
-        private MapView _mapView;
         private GMUHeatmapTileLayer _heatmapLayer;
-
-        private const double BaseLat = 47.38;
-        private const double BaseLong = 8.53;
 
         public HeatmapViewController()
         {
             Title = "Heatmap";
-            _random = new Random((int)DateTime.Now.Ticks);
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
-            View.BackgroundColor = UIColor.White;
-
-            var camera = CameraPosition.FromCamera(BaseLat, BaseLong, 12);
-
-            _mapView = MapView.FromCamera(CGRect.Empty, camera);
-            _mapView.MapType = MapViewType.Satellite;
-
-            View = _mapView;
-
-            AddHeatmap();
+            InitHeatmap();
             UpdateHeatmap();
         }
 
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-        }
-
-        private void AddHeatmap()
+        private void InitHeatmap()
         {
             _heatmapLayer = new GMUHeatmapTileLayer();
 
@@ -59,23 +39,10 @@ namespace Sample
 
         private void UpdateHeatmap()
         {
-            var p = new List<GMUWeightedLatLng>();
-
-            for (var i = 0; i < 100; i++)
-            {
-                var latOffset = (_random.NextDouble() * 2 - 1) / 60;
-                var longOffset = (_random.NextDouble() * 2 - 1) / 60;
-
-                var latitude = BaseLat + latOffset;
-                var longitude = BaseLong + longOffset;
-
-                var coord = new CLLocationCoordinate2D(latitude, longitude);
-
-                p.Add(new GMUWeightedLatLng(coord, 1));
-            }
+            var p = GetRandomLocations(200).Select(r => new GMUWeightedLatLng(r, 1));
 
             _heatmapLayer.WeightedData = p.ToArray();
-            _heatmapLayer.Map = _mapView;
+            _heatmapLayer.Map = mapView;
         }
     }
 }

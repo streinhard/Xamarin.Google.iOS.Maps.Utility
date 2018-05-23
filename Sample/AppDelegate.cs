@@ -12,6 +12,8 @@ namespace Sample
     {
         // class-level declarations
 
+
+
         public override UIWindow Window
         {
             get;

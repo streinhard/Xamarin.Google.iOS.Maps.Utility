@@ -113,6 +113,9 @@
     <Compile Include="MainViewController.cs" />
     <Compile Include="HeatmapViewController.cs" />
     <Compile Include="Secrets.cs" />
+    <Compile Include="ClusterViewController.cs" />
+    <Compile Include="MapViewController.cs" />
+    <Compile Include="POIItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GoogleMapsUtility-iOS-Binding\GoogleMapsUtility-iOS-Binding.csproj">
