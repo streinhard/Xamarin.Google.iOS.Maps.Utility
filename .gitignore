@@ -13,3 +13,4 @@ packages
 build
 
 Resource.designer.cs
+Secrets.cs
