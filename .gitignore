@@ -10,5 +10,6 @@
 *.userprefs
 
 packages
+build
 
 Resource.designer.cs

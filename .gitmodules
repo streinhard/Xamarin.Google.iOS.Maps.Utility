@@ -1,0 +1,3 @@
+[submodule "google-maps-ios-utils"]
+	path = google-maps-ios-utils
+	url = https://github.com/streinhard/google-maps-ios-utils.git
