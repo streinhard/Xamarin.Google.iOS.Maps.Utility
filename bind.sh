@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sharpie bind \
-      -o GoogleMapsUtility-iOS-Binding/Generated \
+      -o Xamarin.Google.iOS.Maps.Utility/Generated \
       -sdk iphoneos11.3 \
       -scope google-maps-ios-utils/src \
       google-maps-ios-utils/src/Clustering/GMUCluster.h \

@@ -21,4 +21,4 @@ xcodebuild \
 lipo -create \
 	build/Build/Products/Release-iphoneos/libGoogleMapsUtils.a \
 	build/Build/Products/Release-iphonesimulator/libGoogleMapsUtils.a \
-	-output GoogleMapsUtility-iOS-Binding/libGoogleMapsUtils.a
+	-output Xamarin.Google.iOS.Maps.Utility/libGoogleMapsUtils.a

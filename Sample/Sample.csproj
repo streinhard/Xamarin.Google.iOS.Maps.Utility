@@ -120,9 +120,9 @@
     <Compile Include="KMLViewController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GoogleMapsUtility-iOS-Binding\GoogleMapsUtility-iOS-Binding.csproj">
-      <Project>{8B4B4D7C-D28C-4720-81CF-B9247471419C}</Project>
-      <Name>GoogleMapsUtility-iOS-Binding</Name>
+    <ProjectReference Include="..\Xamarin.Google.iOS.Maps.Utility\Xamarin.Google.iOS.Maps.Utility.csproj">
+      <Project>{0F7754A3-F341-47FC-A7E3-83E8DD8A3B22}</Project>
+      <Name>Xamarin.Google.iOS.Maps.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

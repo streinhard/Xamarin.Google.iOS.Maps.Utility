@@ -12,7 +12,7 @@ using Foundation;
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("GoogleMapsUtility-iOS-Binding")]
+[assembly: AssemblyTitle("Xamarin.Google.iOS.Maps.Utility")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("bitforge AG")]

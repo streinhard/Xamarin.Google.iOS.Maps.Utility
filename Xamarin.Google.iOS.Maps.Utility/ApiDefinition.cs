@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using CoreGraphics;
 using CoreLocation;
 using Foundation;
@@ -134,7 +134,7 @@ namespace Google.Maps.Utility
         GMUCluster[] ClustersAtZoom(float zoom);
     }
 
-    interface IGMUClusterAlgorithm {}
+    interface IGMUClusterAlgorithm { }
 
     // @interface GMUGridBasedClusterAlgorithm : NSObject <GMUClusterAlgorithm>
     [BaseType(typeof(GMUClusterAlgorithm))]
@@ -210,7 +210,7 @@ namespace Google.Maps.Utility
         UIImage IconForSize(nuint size);
     }
 
-    interface IGMUClusterIconGenerator {}
+    interface IGMUClusterIconGenerator { }
 
     // @interface GMUDefaultClusterIconGenerator : NSObject <GMUClusterIconGenerator>
     [BaseType(typeof(GMUClusterIconGenerator))]
@@ -250,7 +250,7 @@ namespace Google.Maps.Utility
         void Update();
     }
 
-    interface IGMUClusterRenderer {}
+    interface IGMUClusterRenderer { }
 
     // @protocol GMUClusterRendererDelegate <NSObject>
     [Protocol, Model]
