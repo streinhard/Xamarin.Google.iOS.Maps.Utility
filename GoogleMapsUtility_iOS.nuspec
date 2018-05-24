@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Xamarin.Google.iOS.Maps.Utility</id>
+    <version>2.1.1-pre1</version>
+    <title>Xamarin.iOS binding of Google Maps SDK for iOS Utility Library.</title>
+    <authors>Stefan Reinhard</authors>
+    <owners>Stefan Reinhard</owners>
+    <projectUrl>https://github.com/streinhard/Xamarin.Google.iOS.Maps.Utility</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/xamarin/GoogleApisForiOSComponents/master/icons/googleiosmaps_128x128.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Contains classes that are useful for a wide range of applications using the Xamarin Google Maps SDK for iOS.</description>
+    <copyright>Copyright 2018</copyright>
+    <tags>Google Maps Utils Xamarin iOS Xamarin.IOS</tags>
+    <dependencies>
+      <dependency id="Xamarin.Google.iOS.Maps" version="2.5.0" />
+    </dependencies>
+  </metadata>
+   <files>
+    <file src="Xamarin.Google.iOS.Maps.Utility/bin/Release/Xamarin.Google.iOS.Maps.Utility.dll" target="lib/Xamarin.iOS10" />
+  </files>
+</package>
