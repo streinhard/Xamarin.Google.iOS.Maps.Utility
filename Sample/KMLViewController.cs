@@ -20,10 +20,10 @@ namespace Sample
 
             var path = NSBundle.MainBundle.PathForResource("KML_Sample", "kml");
             var url = new NSUrl(path, isDir: false);
-            var parser = new GMUKMLParser(url);
+            var parser = new KMLParser(url);
             parser.Parse();
 
-            var renderer = new GMUGeometryRenderer(mapView, parser.Placemarks, parser.Styles);
+            var renderer = new GeometryRenderer(mapView, parser.Placemarks, parser.Styles);
             renderer.Render();
         }
     }

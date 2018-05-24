@@ -6,7 +6,7 @@ namespace Sample
 {
     public class ClusterViewController : MapViewController
     {
-        private GMUClusterManager clusterManager;
+        private ClusterManager clusterManager;
 
         public ClusterViewController()
         {
@@ -24,11 +24,11 @@ namespace Sample
 
         private void InitClustering()
         {
-            var iconGenerator = new GMUDefaultClusterIconGenerator();
-            var algorithm = new GMUNonHierarchicalDistanceBasedAlgorithm();
-            var renderer = new GMUDefaultClusterRenderer(mapView, iconGenerator);
+            var iconGenerator = new DefaultClusterIconGenerator();
+            var algorithm = new NonHierarchicalDistanceBasedAlgorithm();
+            var renderer = new DefaultClusterRenderer(mapView, iconGenerator);
 
-            clusterManager = new GMUClusterManager(mapView, algorithm, renderer);
+            clusterManager = new ClusterManager(mapView, algorithm, renderer);
         }
 
         private void AddClusterItems()

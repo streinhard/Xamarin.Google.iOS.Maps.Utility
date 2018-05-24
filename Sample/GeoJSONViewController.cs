@@ -21,10 +21,10 @@ namespace Sample
 
             var path = NSBundle.MainBundle.PathForResource("GeoJSON_Sample", "geojson");
             var url = new NSUrl(path, isDir: false);
-            var parser = new GMUGeoJSONParser(url);
+            var parser = new GeoJSONParser(url);
             parser.Parse();
 
-            var renderer = new GMUGeometryRenderer(mapView, parser.Features);
+            var renderer = new GeometryRenderer(mapView, parser.Features);
             renderer.Render();
         }
     }

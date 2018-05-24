@@ -11,7 +11,7 @@ namespace Sample
 {
     public class HeatmapViewController : MapViewController
     {
-        private GMUHeatmapTileLayer _heatmapLayer;
+        private HeatmapTileLayer _heatmapLayer;
 
         public HeatmapViewController()
         {
@@ -28,7 +28,7 @@ namespace Sample
 
         private void InitHeatmap()
         {
-            _heatmapLayer = new GMUHeatmapTileLayer();
+            _heatmapLayer = new HeatmapTileLayer();
 
             _heatmapLayer.MinimumZoomIntensity = 10;
             _heatmapLayer.MaximumZoomIntensity = 20;
@@ -39,7 +39,7 @@ namespace Sample
 
         private void UpdateHeatmap()
         {
-            var p = GetRandomLocations(200).Select(r => new GMUWeightedLatLng(r, 1));
+            var p = GetRandomLocations(200).Select(r => new WeightedLatLng(r, 1));
 
             _heatmapLayer.WeightedData = p.ToArray();
             _heatmapLayer.Map = mapView;

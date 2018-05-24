@@ -3,7 +3,7 @@ using CoreLocation;
 using Google.Maps.Utility;
 namespace Sample
 {
-    public class POIItem : GMUClusterItem
+    public class POIItem : ClusterItem
     {
         public string Name { get; set; }
         public CLLocationCoordinate2D Location { get; set; }
