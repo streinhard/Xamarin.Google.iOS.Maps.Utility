@@ -3,7 +3,7 @@ Xamarin.Google.iOS.Maps.Utility
 
 [![NuGet Badge](https://buildstats.info/nuget/Xamarin.Google.iOS.Maps.Utility?includePreReleases=true)](https://www.nuget.org/packages/Xamarin.Google.iOS.Maps.Utility/)
 
-Xamarin.iOS binding of [Google Maps SDK for iOS Utility Library](library-repo).
+Xamarin.iOS binding of [Google Maps SDK for iOS Utility Library][library-repo].
 
 For more information, check out the detailed guide on the
 [Google Developers site][devsite-guide].
