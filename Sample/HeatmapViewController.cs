@@ -28,13 +28,14 @@ namespace Sample
 
         private void InitHeatmap()
         {
-            _heatmapLayer = new HeatmapTileLayer();
+            _heatmapLayer = new HeatmapTileLayer
+            {
+                MinimumZoomIntensity = 10,
+                MaximumZoomIntensity = 20,
 
-            _heatmapLayer.MinimumZoomIntensity = 10;
-            _heatmapLayer.MaximumZoomIntensity = 20;
-
-            _heatmapLayer.Radius = 60;
-            _heatmapLayer.Opacity = 0.5f;
+                Radius = 60,
+                Opacity = 0.5f
+            };
         }
 
         private void UpdateHeatmap()

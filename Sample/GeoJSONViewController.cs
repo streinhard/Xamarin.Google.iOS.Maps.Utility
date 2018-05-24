@@ -5,8 +5,6 @@ namespace Sample
 {
     public class GeoJSONViewController : MapViewController
     {
-        //@37.4220041,-122.0862515,17z
-
         public GeoJSONViewController()
         {
             Title = "GeoJSON Sample";
@@ -19,6 +17,11 @@ namespace Sample
         {
             base.ViewDidLoad();
 
+            RenderGeoJson();
+        }
+
+        private void RenderGeoJson()
+        {
             var path = NSBundle.MainBundle.PathForResource("GeoJSON_Sample", "geojson");
             var url = new NSUrl(path, isDir: false);
             var parser = new GeoJSONParser(url);

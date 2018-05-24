@@ -54,7 +54,6 @@ namespace Sample
             NavigationController.PushViewController(clusterController, true);
         }
 
-
         void OnShowHeatmap(object sender, EventArgs e)
         {
             var heatmapController = new HeatmapViewController();

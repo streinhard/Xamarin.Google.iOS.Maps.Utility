@@ -18,6 +18,11 @@ namespace Sample
         {
             base.ViewDidLoad();
 
+            RenderKML();
+        }
+
+        private void RenderKML()
+        {
             var path = NSBundle.MainBundle.PathForResource("KML_Sample", "kml");
             var url = new NSUrl(path, isDir: false);
             var parser = new KMLParser(url);
