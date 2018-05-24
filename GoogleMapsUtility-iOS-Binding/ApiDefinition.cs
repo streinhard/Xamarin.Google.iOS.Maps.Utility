@@ -1,4 +1,5 @@
 using System;
+using CoreGraphics;
 using CoreLocation;
 using Foundation;
 using ObjCRuntime;
@@ -370,4 +371,158 @@ namespace Google.Maps.Utility
         [Export("maximumZoomIntensity")]
         nuint MaximumZoomIntensity { get; set; }
     }
+
+    // @interface GMUGeoJSONParser : NSObject
+    [BaseType(typeof(NSObject))]
+    interface GMUGeoJSONParser
+    {
+        // @property (readonly, nonatomic) NSArray<id<GMUGeometryContainer>> * _Nonnull features;
+        [Export("features")]
+        GMUGeometryContainer[] Features { get; }
+
+        // -(instancetype _Nonnull)initWithURL:(NSURL * _Nonnull)url;
+        [Export("initWithURL:")]
+        IntPtr Constructor(NSUrl url);
+
+        // -(instancetype _Nonnull)initWithData:(NSData * _Nonnull)data;
+        [Export("initWithData:")]
+        IntPtr Constructor(NSData data);
+
+        // -(instancetype _Nonnull)initWithStream:(NSInputStream * _Nonnull)stream;
+        [Export("initWithStream:")]
+        IntPtr Constructor(NSInputStream stream);
+
+        // -(void)parse;
+        [Export("parse")]
+        void Parse();
+    }
+
+    // @interface GMUKMLParser : NSObject
+    [BaseType(typeof(NSObject))]
+    interface GMUKMLParser
+    {
+        // @property (readonly, nonatomic) NSArray<id<GMUGeometryContainer>> * _Nonnull placemarks;
+        [Export("placemarks")]
+        GMUGeometryContainer[] Placemarks { get; }
+
+        // @property (readonly, nonatomic) NSArray<GMUStyle *> * _Nonnull styles;
+        [Export("styles")]
+        GMUStyle[] Styles { get; }
+
+        // -(void)parse;
+        [Export("parse")]
+        void Parse();
+
+        // -(instancetype _Nonnull)initWithURL:(NSURL * _Nonnull)url;
+        [Export("initWithURL:")]
+        IntPtr Constructor(NSUrl url);
+
+        // -(instancetype _Nonnull)initWithData:(NSData * _Nonnull)data;
+        [Export("initWithData:")]
+        IntPtr Constructor(NSData data);
+
+        // -(instancetype _Nonnull)initWithStream:(NSInputStream * _Nonnull)stream;
+        [Export("initWithStream:")]
+        IntPtr Constructor(NSInputStream stream);
+    }
+
+    // @interface GMUGeometryRenderer : NSObject
+    [BaseType(typeof(NSObject))]
+    interface GMUGeometryRenderer
+    {
+        // -(instancetype _Nonnull)initWithMap:(GMSMapView * _Nonnull)map geometries:(NSArray<id<GMUGeometryContainer>> * _Nonnull)geometries;
+        [Export("initWithMap:geometries:")]
+        IntPtr Constructor(MapView map, GMUGeometryContainer[] geometries);
+
+        // -(instancetype _Nonnull)initWithMap:(GMSMapView * _Nonnull)map geometries:(NSArray<id<GMUGeometryContainer>> * _Nonnull)geometries styles:(NSArray<GMUStyle *> * _Nullable)styles;
+        [Export("initWithMap:geometries:styles:")]
+        IntPtr Constructor(MapView map, GMUGeometryContainer[] geometries, [NullAllowed] GMUStyle[] styles);
+
+        // -(void)render;
+        [Export("render")]
+        void Render();
+
+        // -(void)clear;
+        [Export("clear")]
+        void Clear();
+    }
+
+    // @protocol GMUGeometry <NSObject>
+    [Protocol, Model]
+    [BaseType(typeof(NSObject))]
+    interface GMUGeometry
+    {
+        // @required @property (readonly, nonatomic) NSString * _Nonnull type;
+        [Abstract]
+        [Export("type")]
+        string Type { get; }
+    }
+
+    // @interface GMUStyle : NSObject
+    [BaseType(typeof(NSObject))]
+    interface GMUStyle
+    {
+        // @property (readonly, nonatomic) NSString * _Nonnull styleID;
+        [Export("styleID")]
+        string StyleID { get; }
+
+        // @property (readonly, nonatomic) UIColor * _Nullable strokeColor;
+        [NullAllowed, Export("strokeColor")]
+        UIColor StrokeColor { get; }
+
+        // @property (readonly, nonatomic) UIColor * _Nullable fillColor;
+        [NullAllowed, Export("fillColor")]
+        UIColor FillColor { get; }
+
+        // @property (readonly, nonatomic) CGFloat width;
+        [Export("width")]
+        nfloat Width { get; }
+
+        // @property (readonly, nonatomic) CGFloat scale;
+        [Export("scale")]
+        nfloat Scale { get; }
+
+        // @property (readonly, nonatomic) CGFloat heading;
+        [Export("heading")]
+        nfloat Heading { get; }
+
+        // @property (readonly, nonatomic) CGPoint anchor;
+        [Export("anchor")]
+        CGPoint Anchor { get; }
+
+        // @property (readonly, nonatomic) NSString * _Nullable iconUrl;
+        [NullAllowed, Export("iconUrl")]
+        string IconUrl { get; }
+
+        // @property (readonly, nonatomic) NSString * _Nullable title;
+        [NullAllowed, Export("title")]
+        string Title { get; }
+
+        // @property (readonly, nonatomic) BOOL hasFill;
+        [Export("hasFill")]
+        bool HasFill { get; }
+
+        // @property (readonly, nonatomic) BOOL hasStroke;
+        [Export("hasStroke")]
+        bool HasStroke { get; }
+
+        // -(instancetype _Nonnull)initWithStyleID:(NSString * _Nonnull)styleID strokeColor:(UIColor * _Nullable)strokeColor fillColor:(UIColor * _Nullable)fillColor width:(CGFloat)width scale:(CGFloat)scale heading:(CGFloat)heading anchor:(CGPoint)anchor iconUrl:(NSString * _Nullable)iconUrl title:(NSString * _Nullable)title hasFill:(BOOL)hasFill hasStroke:(BOOL)hasStroke;
+        [Export("initWithStyleID:strokeColor:fillColor:width:scale:heading:anchor:iconUrl:title:hasFill:hasStroke:")]
+        IntPtr Constructor(string styleID, [NullAllowed] UIColor strokeColor, [NullAllowed] UIColor fillColor, nfloat width, nfloat scale, nfloat heading, CGPoint anchor, [NullAllowed] string iconUrl, [NullAllowed] string title, bool hasFill, bool hasStroke);
+    }
+
+    // @protocol GMUGeometryContainer <NSObject>
+    [Protocol, Model]
+    [BaseType(typeof(NSObject))]
+    interface GMUGeometryContainer
+    {
+        // @required @property (readonly, nonatomic) id<GMUGeometry> _Nonnull geometry;
+        [Export("geometry")]
+        GMUGeometry Geometry { get; }
+
+        // @required @property (nonatomic) GMUStyle * _Nullable style;
+        [NullAllowed, Export("style", ArgumentSemantic.Assign)]
+        GMUStyle Style { get; set; }
+    }
+
 }

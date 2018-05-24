@@ -33,6 +33,18 @@ namespace Sample
             heatmapButton.Frame = new CGRect(0, 150, width, 50);
             View.Add(heatmapButton);
 
+            var geoJsonButton = new UIButton(UIButtonType.System);
+            geoJsonButton.SetTitle("GeoJSON", UIControlState.Normal);
+            geoJsonButton.TouchUpInside += OnShowGeoJson;
+            geoJsonButton.Frame = new CGRect(0, 200, width, 50);
+            View.Add(geoJsonButton);
+
+            var kmlButton = new UIButton(UIButtonType.System);
+            kmlButton.SetTitle("KML", UIControlState.Normal);
+            kmlButton.TouchUpInside += OnShowKml;
+            kmlButton.Frame = new CGRect(0, 250, width, 50);
+            View.Add(kmlButton);
+
 
         }
 
@@ -47,6 +59,18 @@ namespace Sample
         {
             var heatmapController = new HeatmapViewController();
             NavigationController.PushViewController(heatmapController, true);
+        }
+
+        void OnShowGeoJson(object sender, EventArgs e)
+        {
+            var geoJsonController = new GeoJSONViewController();
+            NavigationController.PushViewController(geoJsonController, true);
+        }
+
+        private void OnShowKml(object sender, EventArgs e)
+        {
+            var kmlController = new KMLViewController();
+            NavigationController.PushViewController(kmlController, true);
         }
     }
 }

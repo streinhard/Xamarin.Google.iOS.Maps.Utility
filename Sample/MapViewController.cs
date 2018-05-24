@@ -13,9 +13,9 @@ namespace Sample
 
         protected MapView mapView;
 
-        private const double BaseLat = 47.38;
-        private const double BaseLong = 8.52;
-        private const float BaseZoom = 12;
+        protected double BaseLat = 47.38;
+        protected double BaseLong = 8.52;
+        protected float BaseZoom = 12;
 
         public MapViewController()
         {

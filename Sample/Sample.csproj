@@ -116,12 +116,18 @@
     <Compile Include="ClusterViewController.cs" />
     <Compile Include="MapViewController.cs" />
     <Compile Include="POIItem.cs" />
+    <Compile Include="GeoJSONViewController.cs" />
+    <Compile Include="KMLViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GoogleMapsUtility-iOS-Binding\GoogleMapsUtility-iOS-Binding.csproj">
       <Project>{8B4B4D7C-D28C-4720-81CF-B9247471419C}</Project>
       <Name>GoogleMapsUtility-iOS-Binding</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GeoJSON_Sample.geojson" />
+    <BundleResource Include="Resources\KML_Sample.kml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.7\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.7\build\Xamarin.Build.Download.targets')" />
