@@ -18,6 +18,8 @@ namespace Google.Maps.Utility
         CLLocationCoordinate2D Position { get; }
     }
 
+    interface IClusterItem { }
+
     // @protocol GMUCluster <NSObject>
     [Protocol, Model]
     [BaseType(typeof(NSObject), Name = "GMUCluster")]
@@ -39,6 +41,8 @@ namespace Google.Maps.Utility
         ClusterItem[] Items { get; }
     }
 
+    interface ICluster { }
+
     // @protocol GMUClusterManagerDelegate <NSObject>
     [Protocol, Model]
     [BaseType(typeof(NSObject), Name = "GMUClusterManagerDelegate")]
@@ -46,12 +50,14 @@ namespace Google.Maps.Utility
     {
         // @optional -(BOOL)clusterManager:(GMUClusterManager * _Nonnull)clusterManager didTapCluster:(id<GMUCluster> _Nonnull)cluster;
         [Export("clusterManager:didTapCluster:")]
-        bool DidTapCluster(ClusterManager clusterManager, Cluster cluster);
+        bool DidTapCluster(ClusterManager clusterManager, ICluster cluster);
 
         // @optional -(BOOL)clusterManager:(GMUClusterManager * _Nonnull)clusterManager didTapClusterItem:(id<GMUClusterItem> _Nonnull)clusterItem;
         [Export("clusterManager:didTapClusterItem:")]
         bool DidTapClusterItem(ClusterManager clusterManager, ClusterItem clusterItem);
     }
+
+    interface IClusterManagerDelegate { }
 
     // @interface GMUClusterManager : NSObject
     [BaseType(typeof(NSObject), Name = "GMUClusterManager")]
@@ -69,7 +75,7 @@ namespace Google.Maps.Utility
 
         [Wrap("WeakDelegate")]
         [NullAllowed]
-        ClusterManagerDelegate Delegate { get; }
+        IClusterManagerDelegate Delegate { get; }
 
         // @property (readonly, nonatomic, weak) id<GMUClusterManagerDelegate> _Nullable delegate;
         [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
@@ -85,19 +91,19 @@ namespace Google.Maps.Utility
 
         // -(void)setDelegate:(id<GMUClusterManagerDelegate> _Nullable)delegate mapDelegate:(id _Nullable)mapDelegate;
         [Export("setDelegate:mapDelegate:")]
-        void SetDelegate([NullAllowed] ClusterManagerDelegate @delegate, [NullAllowed] NSObject mapDelegate);
+        void SetDelegate([NullAllowed] IClusterManagerDelegate @delegate, [NullAllowed] NSObject mapDelegate);
 
         // -(void)addItem:(id<GMUClusterItem> _Nonnull)item;
         [Export("addItem:")]
-        void AddItem(ClusterItem item);
+        void AddItem(IClusterItem item);
 
         // -(void)addItems:(NSArray<id<GMUClusterItem>> * _Nonnull)items;
         [Export("addItems:")]
-        void AddItems(ClusterItem[] items);
+        void AddItems(IClusterItem[] items);
 
         // -(void)removeItem:(id<GMUClusterItem> _Nonnull)item;
         [Export("removeItem:")]
-        void RemoveItem(ClusterItem item);
+        void RemoveItem(IClusterItem item);
 
         // -(void)clearItems;
         [Export("clearItems")]
@@ -131,7 +137,7 @@ namespace Google.Maps.Utility
         // @required -(NSArray<id<GMUCluster>> * _Nonnull)clustersAtZoom:(float)zoom;
         [Abstract]
         [Export("clustersAtZoom:")]
-        Cluster[] ClustersAtZoom(float zoom);
+        ICluster[] ClustersAtZoom(float zoom);
     }
 
     interface IClusterAlgorithm { }
@@ -154,7 +160,7 @@ namespace Google.Maps.Utility
 
         [Override]
         [Export("clustersAtZoom:")]
-        Cluster[] ClustersAtZoom(float zoom);
+        ICluster[] ClustersAtZoom(float zoom);
     }
 
     // @interface GMUNonHierarchicalDistanceBasedAlgorithm : NSObject <GMUClusterAlgorithm>
@@ -175,7 +181,7 @@ namespace Google.Maps.Utility
 
         [Override]
         [Export("clustersAtZoom:")]
-        Cluster[] ClustersAtZoom(float zoom);
+        ICluster[] ClustersAtZoom(float zoom);
     }
 
     // @interface GMUSimpleClusterAlgorithm : NSObject <GMUClusterAlgorithm>
@@ -196,7 +202,36 @@ namespace Google.Maps.Utility
 
         [Override]
         [Export("clustersAtZoom:")]
-        Cluster[] ClustersAtZoom(float zoom);
+        ICluster[] ClustersAtZoom(float zoom);
+    }
+
+    // @interface GMUStaticCluster : NSObject <GMUCluster>
+    [BaseType(typeof(NSObject))]
+    interface GMUStaticCluster : Cluster
+    {
+        // -(instancetype _Nonnull)initWithPosition:(CLLocationCoordinate2D)position;
+        [Export("initWithPosition:")]
+        IntPtr Constructor(CLLocationCoordinate2D position);
+
+        // @property (readonly, nonatomic) CLLocationCoordinate2D position;
+        [Export("position")]
+        CLLocationCoordinate2D Position { get; }
+
+        // @property (readonly, nonatomic) NSUInteger count;
+        [Export("count")]
+        nuint Count { get; }
+
+        // @property (readonly, nonatomic) NSArray<id<GMUClusterItem>> * _Nonnull items;
+        [Export("items")]
+        ClusterItem[] Items { get; }
+
+        // -(void)addItem:(id<GMUClusterItem> _Nonnull)item;
+        [Export("addItem:")]
+        void AddItem(IClusterItem item);
+
+        // -(void)removeItem:(id<GMUClusterItem> _Nonnull)item;
+        [Export("removeItem:")]
+        void RemoveItem(IClusterItem item);
     }
 
     // @protocol GMUClusterIconGenerator <NSObject>
@@ -242,7 +277,7 @@ namespace Google.Maps.Utility
         // @required -(void)renderClusters:(NSArray<id<GMUCluster>> * _Nonnull)clusters;
         [Abstract]
         [Export("renderClusters:")]
-        void RenderClusters(Cluster[] clusters);
+        void RenderClusters(ICluster[] clusters);
 
         // @required -(void)update;
         [Abstract]
@@ -271,9 +306,11 @@ namespace Google.Maps.Utility
         void DidRenderMarker(ClusterRenderer renderer, Marker marker);
     }
 
+    interface IClusterRendererDelegate { }
+
     // @interface GMUDefaultClusterRenderer : NSObject <GMUClusterRenderer>
     [BaseType(typeof(ClusterRenderer), Name = "GMUDefaultClusterRenderer")]
-    interface DefaultClusterRenderer : IClusterRenderer
+    interface DefaultClusterRenderer : ClusterRenderer
     {
         // @property (nonatomic) BOOL animatesClusters;
         [Export("animatesClusters")]
@@ -285,7 +322,7 @@ namespace Google.Maps.Utility
 
         [Wrap("WeakDelegate")]
         [NullAllowed]
-        ClusterRendererDelegate Delegate { get; set; }
+        IClusterRendererDelegate Delegate { get; set; }
 
         // @property (nonatomic, weak) id<GMUClusterRendererDelegate> _Nullable delegate;
         [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
@@ -297,16 +334,20 @@ namespace Google.Maps.Utility
 
         // -(BOOL)shouldRenderAsCluster:(id<GMUCluster> _Nonnull)cluster atZoom:(float)zoom;
         [Export("shouldRenderAsCluster:atZoom:")]
-        bool ShouldRenderAsCluster(Cluster cluster, float zoom);
+        bool ShouldRenderAsCluster(ICluster cluster, float zoom);
 
         [Override]
         [Export("renderClusters:")]
-        void RenderClusters(Cluster[] clusters);
+        void RenderClusters(ICluster[] clusters);
 
         // @required -(void)update;
         [Override]
         [Export("update")]
         void Update();
+
+        [Export("markers")]
+        Marker[] Markers { get; }
+
     }
 
     // @interface GMUGradient : NSObject
