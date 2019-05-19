@@ -38,7 +38,7 @@ namespace Google.Maps.Utility
         // @required @property (readonly, nonatomic) NSArray<id<GMUClusterItem>> * _Nonnull items;
         [Abstract]
         [Export("items")]
-        ClusterItem[] Items { get; }
+        IClusterItem[] Items { get; }
     }
 
     interface ICluster { }
@@ -54,7 +54,7 @@ namespace Google.Maps.Utility
 
         // @optional -(BOOL)clusterManager:(GMUClusterManager * _Nonnull)clusterManager didTapClusterItem:(id<GMUClusterItem> _Nonnull)clusterItem;
         [Export("clusterManager:didTapClusterItem:")]
-        bool DidTapClusterItem(ClusterManager clusterManager, ClusterItem clusterItem);
+        bool DidTapClusterItem(ClusterManager clusterManager, IClusterItem clusterItem);
     }
 
     interface IClusterManagerDelegate { }
@@ -122,12 +122,12 @@ namespace Google.Maps.Utility
         // @required -(void)addItems:(NSArray<id<GMUClusterItem>> * _Nonnull)items;
         [Abstract]
         [Export("addItems:")]
-        void AddItems(ClusterItem[] items);
+        void AddItems(IClusterItem[] items);
 
         // @required -(void)removeItem:(id<GMUClusterItem> _Nonnull)item;
         [Abstract]
         [Export("removeItem:")]
-        void RemoveItem(ClusterItem item);
+        void RemoveItem(IClusterItem item);
 
         // @required -(void)clearItems;
         [Abstract]
@@ -148,11 +148,11 @@ namespace Google.Maps.Utility
     {
         [Override]
         [Export("addItems:")]
-        void AddItems(ClusterItem[] items);
+        void AddItems(IClusterItem[] items);
 
         [Override]
         [Export("removeItem:")]
-        void RemoveItem(ClusterItem item);
+        void RemoveItem(IClusterItem item);
 
         [Override]
         [Export("clearItems")]
@@ -169,11 +169,11 @@ namespace Google.Maps.Utility
     {
         [Override]
         [Export("addItems:")]
-        void AddItems(ClusterItem[] items);
+        void AddItems(IClusterItem[] items);
 
         [Override]
         [Export("removeItem:")]
-        void RemoveItem(ClusterItem item);
+        void RemoveItem(IClusterItem item);
 
         [Override]
         [Export("clearItems")]
@@ -190,11 +190,11 @@ namespace Google.Maps.Utility
     {
         [Override]
         [Export("addItems:")]
-        void AddItems(ClusterItem[] items);
+        void AddItems(IClusterItem[] items);
 
         [Override]
         [Export("removeItem:")]
-        void RemoveItem(ClusterItem item);
+        void RemoveItem(IClusterItem item);
 
         [Override]
         [Export("clearItems")]
@@ -223,7 +223,7 @@ namespace Google.Maps.Utility
 
         // @property (readonly, nonatomic) NSArray<id<GMUClusterItem>> * _Nonnull items;
         [Export("items")]
-        ClusterItem[] Items { get; }
+        IClusterItem[] Items { get; }
 
         // -(void)addItem:(id<GMUClusterItem> _Nonnull)item;
         [Export("addItem:")]
@@ -295,15 +295,15 @@ namespace Google.Maps.Utility
         // @optional -(GMSMarker * _Nullable)renderer:(id<GMUClusterRenderer> _Nonnull)renderer markerForObject:(id _Nonnull)object;
         [Export("renderer:markerForObject:")]
         [return: NullAllowed]
-        Marker Renderer(ClusterRenderer renderer, NSObject @object);
+        Marker Renderer(IClusterRenderer renderer, NSObject @object);
 
         // @optional -(void)renderer:(id<GMUClusterRenderer> _Nonnull)renderer willRenderMarker:(GMSMarker * _Nonnull)marker;
         [Export("renderer:willRenderMarker:")]
-        void WillRenderMarker(ClusterRenderer renderer, Marker marker);
+        void WillRenderMarker(IClusterRenderer renderer, Marker marker);
 
         // @optional -(void)renderer:(id<GMUClusterRenderer> _Nonnull)renderer didRenderMarker:(GMSMarker * _Nonnull)marker;
         [Export("renderer:didRenderMarker:")]
-        void DidRenderMarker(ClusterRenderer renderer, Marker marker);
+        void DidRenderMarker(IClusterRenderer renderer, Marker marker);
     }
 
     interface IClusterRendererDelegate { }
@@ -330,7 +330,7 @@ namespace Google.Maps.Utility
 
         // -(instancetype _Nonnull)initWithMapView:(GMSMapView * _Nonnull)mapView clusterIconGenerator:(id<GMUClusterIconGenerator> _Nonnull)iconGenerator;
         [Export("initWithMapView:clusterIconGenerator:")]
-        IntPtr Constructor(MapView mapView, ClusterIconGenerator iconGenerator);
+        IntPtr Constructor(MapView mapView, IClusterIconGenerator iconGenerator);
 
         // -(BOOL)shouldRenderAsCluster:(id<GMUCluster> _Nonnull)cluster atZoom:(float)zoom;
         [Export("shouldRenderAsCluster:atZoom:")]
