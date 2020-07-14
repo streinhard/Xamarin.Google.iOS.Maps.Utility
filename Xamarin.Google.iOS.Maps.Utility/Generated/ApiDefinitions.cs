@@ -393,6 +393,11 @@ interface GMUGeometry
 	[Abstract]
 	[Export ("type")]
 	string Type { get; }
+	
+	// @required @property (readonly, nonatomic) NSString * _Nonnull type;
+	[Abstract]
+	[Export ("coordinates")]
+	GMUCoordinates[] Coordinates { get; }
 }
 
 // @interface GMUStyle : NSObject
@@ -458,8 +463,27 @@ interface GMUGeometryContainer
 	[Export ("geometry")]
 	GMUGeometry Geometry { get; }
 
+	// @required @property (readonly, nonatomic) NSString * _Nonnull type;
+	[Abstract]
+	[Export ("properties")]
+	GMUProperties[] properties { get; }
+	
 	// @required @property (nonatomic) GMUStyle * _Nullable style;
 	[Abstract]
 	[NullAllowed, Export ("style", ArgumentSemantic.Assign)]
 	GMUStyle Style { get; set; }
+}
+
+// @protocol GMUGeometryContainer <NSObject>
+[Protocol, Model]
+[BaseType (typeof(NSObject))]
+interface GMUProperties
+{
+	// @property (readonly, nonatomic) NSString * _Nonnull styleID;
+	[Export ("key")]
+	string key { get; }
+	
+	// @property (readonly, nonatomic) NSString * _Nonnull styleID;
+	[Export ("value")]
+	string value { get; }
 }
